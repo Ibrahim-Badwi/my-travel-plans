@@ -1,0 +1,402 @@
+SETUP:
+git config --global user.name "<Your-Full-Name>"
+git config --global user.email "<your-email-address>"
+git config --global color.ui auto			# makes sure that Git output is colored
+git config --global merge.conflictstyle diff3		# displays the original state in a conflict
+git config --list
+git config --global core.editor "atom --wait"
+git config --global core.editor "'C:/Program Files/Sublime Text 2/sublime_text.exe' -n -w"
+git config --global core.editor "code --wait"
+
+
+CREATE:
+git init		create a new, empty repository in the current directory.
+git clone		used to create an identical copy of an existing repository.
+git clone PATH NAME	clone the repo from PATH to cuurent dir and name it NAME
+git status		show the state of files, the working directory, and the repository
+
+
+REVIEW:
+git log			display all of the commits of a repository.
+git log	--oneline	Change how git log displays information
+git log	--state		display the files that have been changed in the commit
+git log -p		Viewing File Changes
+git show		Viewing A Specific Commit same as git log -p
+all these commands accept SHA
+
+TAGGING,BRANCHING,and MERGING:
+
+add commit to repo:
+git add		add files from working dir to staging index
+git commit	take file from staging index and save them to repo
+git diff	display the differnce3 between tow version of file
+
+git commit -m "commit message"
+The goal is that each commit has a single focus. 
+Each commit should record a single-unit change
+a commit shouldn't include unrelated changes
+"This commit will..."
+do explain what the commit does (not how or why!)
+
+explain what the commit does	: with commit
+git log -p explain 		:how the changes are made 
+writing the commit message to	:explain why the changes are made 
+
+git diff 			:see changes that have been made but haven't been committed
+.gitignore
+
+git tag -a			:add annotated flag (person whomade it,date,message)
+git tag				:add lightweight flag
+git tag	-a beta			:tag the most recent commit
+git tag	-a v0.0 SHA		:tag specific SHA
+git tag				:verify the tag
+git tag -d tag_name		:delete a tag
+
+branche let us work on the same project in differnt isolated environment
+HEAD poiner point to the branch that is active
+checkout to switch the active branch
+
+
+git branch			:interact with Git's branches
+git checkout branch		:move HEAD pointer to branch
+git branch new_branch		:create new branch
+git checkout -b branch_name	:create new branch and switch to it
+git checkout -b branch_name master	:create new branch and switch to it ,based on master
+git checkout -b branch_name SHA		:create new branch and switch to it ,based on SHA
+git log --oneline --graph --all	:show all commits and branches in repo
+
+git merge branch_name_to_merge_in
+
+undoing changes:
+git commit --amend		:alter most-recent commit
+				:update most-recent commit
+git revert SHA			:reverse given commit
+git reset			:delete commit , in order
+git reset --hrad HEAD^		:undo merge
+
+
+git remote			:to mange remote repo
+git push			:to send changes to the remote
+git pull			:retrieve update from the remote
+
+
+Git is a version control tool
+GitHub is a service to host Git projects
+
+
+
+
+create an index.html file
+create a js directory
+create a css directory
+create an img directory
+create app.css in the css directory
+create app.js in the js directory
+add starter HTML code in index.html
+
+add configuration files for linting (validating code syntax)
+HTML linting			http://htmlhint.com/
+CSS linting			https://stylelint.io/
+JavaScript linting		https://eslint.org/
+configure my code editor	http://editorconfig.org/
+
+
+jdf
+kub
+q
+
+
+
+Expand On Your Git Skills
+take the companion GitHub course
+create a repo to track your computer's settings -https://dotfiles.github.io/
+develop the next, awesome feature for your personal project
+try tackling some Git challenges with the Git-it app
+
+
+
+**************************************
+CREAT:
+**************************************
+git init
+Running the git init command sets up all of the necessary files and directories that Git will use to keep track of everything. All of these files are stored in a directory called .git
+Running this command creates a hidden .git directory. This .git directory is the brain/storage center for the repository. It holds all of the configuration files and directories and is where all of the commits are stored.
+
+
+git clone
+takes the path to an existing repository
+by default will create a directory with the same name as the repository that's being cloned
+can be given a second argument that will be used as the name of the directory
+will create the new repository inside of the current working directory
+
+git status
+tell us about new files that have been created in the Working Directory that Git hasn't started tracking, yet
+files that Git is tracking that have been modified
+a whole bunch of other things that we'll be learning about throughout the rest of the course ;-)
+
+
+***********************************************************************************************
+REVIEW:*****************************************************************************************
+***********************************************************************************************
+git log
+display
+the SHA
+the author
+the date
+and the message
+**************************************
+git log --oneline
+lists one commit per line
+shows the first 7 characters of the commit's SHA
+shows the commit's message
+**************************************
+git log --stat
+displays the file(s) that have been modified
+displays the number of lines that have been added/removed
+displays a summary line with the total number of modified files and lines that have been added/removed
+**************************************
+git log -p
+displays the files that have been modified
+displays the location of the lines that have been added/removed
+displays the actual changes that have been made
+
+view specific commit with SHA:
+git log	SHA
+git log --oneline SHA
+git log --stat SHA
+git log -p SHA
+**************************************
+git show
+
+the commit
+the author
+the date
+the commit message
+the patch information
+
+git show flags -w --stat -p 
+***********************************************************************************************
+TAGGING:****************************************************************************************
+***********************************************************************************************
+git tag tag-name 	lightweight tag		*this will tag the most recent commit
+git tag -a tag-name	annotated tag
+git tag tag-name	add tag to past commit 
+add a tag to the most recent commit
+add a tag to a specific commit if a SHA is passed
+
+annotated tags:
+the person who made the tag
+the date the tag was made
+a message for the tag
+
+git tag			display all tags that are in the repository.
+git tag -d tag-name	delete a tag from commit
+***********************************************************************************************
+BRANCHING:**************************************************************************************
+***********************************************************************************************
+git branch
+list all branch names in the repository
+create new branches
+delete branches
+
+git checkout sidebar
+remove all files and directories from the Working Directory that Git is tracking
+(files that Git tracks are stored in the repository, so nothing is lost)
+go into the repository and pull out all of the files and directories of the commit that the branch points to
+
+git branch		
+git branch name		create new branch
+git branch name SHA	create new branch based on commit with SHA
+git checkout branch	
+git checkout -b branch  create branch and switch to it
+git branch -d sidebar	delete branch 
+
+git log --oneline --decorate --graph --all	see all branches at once
+
+***********************************************************************************************
+MERGING:**************************************************************************************
+***********************************************************************************************
+git merge <name-of-branch-to-merge-in>
+look at the branches that it's going to merge
+look back along the branch's history to find a single commit that both branches have in their commit history
+combine the lines of code that were changed on the separate branches together
+makes a commit to record the merge
+
+
+Fast-forward merge. A Fast-forward merge will just move the currently checked out branch forward until it points to the same commit that the other branch 
+
+Fast-forward merge – the branch being merged in must be ahead of the checked out branch. The checked out branch's pointer will just be moved forward to point to the same commit as the other branch.
+the regular type of merge
+two divergent branches are combined
+a merge commit is created
+
+git reset --hard HEAD^		undo merge
+git merge another-branch
+
+
+***********************************************************************************************
+UNDOING:**************************************************************************************
+***********************************************************************************************
+git commit --amend 		modify the last commit, alter the most-recent commit.
+git revert SHA			revert a given commit and return the last commit state
+git reset			delete commits
+
+Reverting creates a new commit that reverts or undos a previous commit. Resetting, on the other hand, erases commits!
+
+git branch backup
+
+
+git reset
+move the HEAD and current branch pointer to the referenced commit
+
+
+git reset --mixed HEAD^			move commit to working dir [unstage] add and commit to return it 
+git reset --soft HEAD^			move committed changes to the staging index commit to return it
+git reset --hard HEAD^			erase commits , git reflog to restore it
+
+
+
+***********************************************************************************************
+WORKING WITH REMOTE:***************************************************************************
+***********************************************************************************************
+git remote			to manage the remote repo
+git push			to send changes from LOCAL up to remote repo
+git pull			to retrieve update from the REMOTE repo to local
+
+
+Remotes can be accessed in a couple of ways:
+
+with a URL
+path to a file system
+
+
+git remote			to show shortname for whwer yo clone the repo
+git remote -v			to show full path
+
+git remote add origin path	create a connection from my local repository to the remote repository
+
+
+
+git push origin	master		to send changes from branch master up to remote repo (origin)
+git push will sync the remote repository with the local repository.
+
+This marker is origin/master and is called a tracking branch
+git pull			(to sync the local with the remote), and merge (orign/master) and master
+git pull origin	master
+
+
+git fetch origin master		sync the local with the remote,but not merge tow branches (orign/master) and master
+
+1845
+***********************************************************************************************
+WORKING ON ANOTHER DEVELOPER REPO:*************************************************************
+***********************************************************************************************
+fork			"fork" a repository that means you duplicate it.it means copy a remote repo and make it a remote repo too!
+
+
+review another developer changes
+knowing what changes to make
+
+git shortlog 		displays an alphabetical list of names and the commit messages that go along with them		
+git shortlog -s -n	display number of commits and sort them numericaly
+
+
+Filter Commits By Search
+git show SHA
+git log --grep bug
+
+
+group commits by author with git shortlog
+  $ git shortlog
+filter commits with the --author flag
+
+  $ git log --author="Richard Kalehoff"
+filter commits using the --grep flag
+
+  $ git log --grep="border radius issue in Safari"
+
+
+
+Before you start doing any work, make sure to look for the project's CONTRIBUTING.md file.
+
+Next, it's a good idea to look at the GitHub issues for the project
+
+look at the existing issues to see if one is similar to the change you want to contribute
+if necessary create a new issue
+communicate the changes you'd like to make to the project maintainer in the issue
+When you start developing, commit all of your work on a topic branch:
+
+do not work on the master branch
+make sure to give the topic branch clear, descriptive name
+As a general best practice for writing commits:
+
+make frequent, smaller commits
+use clear and descriptive commit messages
+update the README file, if necessary
+
+***********************************************************************************************
+STAING IN SYNC WITH A REMOTE REPO:*************************************************************
+***********************************************************************************************
+A pull request is a request to the original or source repository's maintainer to include changes in their project that you made in your fork of their project. You are requesting that they pull in changes you've made.
+
+
+reviewing the project's CONTRIBUTING.md file
+checking out the project's existing issues
+talking with the project maintainer
+...your pull request is sure to be included!
+
+
+
+A pull request is a request for the source repository to pull in your commits and merge them with their project. To create a pull request, a couple of things need to happen:
+
+you must fork the source repository
+clone your fork down to your machine
+make some commits (ideally on a topic branch!)
+push the commits back to your fork
+create a new pull request and choose the branch that has your new commits
+
+
+
+
+Stay in sync with source project:
+star and watching your best repo
+
+git remote -v
+git remote add origin fork
+git remote add upstream source-repo
+
+git remote rename old new
+
+Retrieving Upstream Changes:
+git fetch upstream origin
+
+git pull is the same thing as a git fetch + git merge!
+
+
+When working with a project that you've forked. The original project's maintainer will continue adding changes to their project. You'll want to keep your fork of their project in sync with theirs so that you can include any changes they make.
+
+To get commits from a source repository into your forked repository on GitHub you need to:
+
+get the cloneable URL of the source repository
+create a new remote with the git remote add command
+use the shortname upstream to point to the source repository
+provide the URL of the source repository
+fetch the new upstream remote
+merge the upstream's branch into a local branch
+push the newly updated local branch to your origin repo
+
+
+
+squash commits:
+git rebase -i HEAD~n
+git push -f origin branch-name
+
+
+?? Back To Normal ??
+If you created the backup branch prior to resetting anything, then you can easily get back to having the master branch point to the same commit as the backup branch. You'll just need to:
+
+remove the uncommitted changes from the working directory
+merge backup into master (which will cause a Fast-forward merge and move master up to the same point as backup)
+$ git checkout -- index.html
+$ git merge backup
+
